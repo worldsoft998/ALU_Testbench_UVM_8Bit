@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# RL training artifacts
+models/
+logs/
+results/
+sim_work/
+
+# VCS simulation artifacts
+csrc/
+*.daidir/
+simv
+simv.daidir/
+*.vpd
+*.fsdb
+*.key
+ucli.key
+vc_hdrs.h
+DVEfiles/
+urgReport/
+.inter.vpd.uvm
+coverage.vdb/
+
+# Named pipes
+/tmp/alu_rl_bridge/
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+*.tar.gz
