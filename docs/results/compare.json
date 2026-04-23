@@ -1,0 +1,16 @@
+{
+  "rl": {
+    "algo": "PPO",
+    "episodes": 5,
+    "mean_final_coverage": 100.0,
+    "mean_steps_to_100": 164.4
+  },
+  "random": {
+    "algo": "RANDOM",
+    "episodes": 5,
+    "mean_final_coverage": 86.66666666666666,
+    "mean_steps_to_100": 2000.0
+  },
+  "delta_mean_final_coverage": 13.333333333333343,
+  "speedup_steps_to_100": 12.165450121654501
+}

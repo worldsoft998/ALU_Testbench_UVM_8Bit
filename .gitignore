@@ -1,0 +1,38 @@
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# RL artefacts
+models/
+tb_log/
+# docs/results/ are kept in the repo as reference run artefacts
+
+# Simulator output
+sim/vcs/simv*
+sim/vcs/*.daidir/
+sim/vcs/csrc/
+sim/vcs/ucli.key
+sim/vcs/*.log
+sim/vcs/logs/
+sim/vcs/*.vcd
+sim/vcs/waves.vcd
+sim/vcs/DVEfiles/
+sim/vcs/AN.DB/
+sim/vcs/vc_hdrs.h
+sim/vcs/*.vpd
+sim/vcs/legacy_simv*
+*.fsdb
+*.cov
+urgReport/
+
+# Misc
+.DS_Store

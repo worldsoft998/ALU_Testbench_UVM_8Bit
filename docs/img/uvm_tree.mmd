@@ -1,0 +1,12 @@
+flowchart TD
+    TB[testbench_top]
+    TB --> TEST["alu_rl_test / alu_random_test"]
+    TEST --> ENV[alu_env]
+    ENV --> AGT[alu_agent]
+    ENV --> SCB[alu_scoreboard]
+    ENV --> COV[alu_coverage_collector]
+    ENV --> BR[alu_rl_bridge]
+    AGT --> SQR[alu_sequencer]
+    AGT --> DRV[alu_driver]
+    AGT --> MON[alu_monitor]
+    BR --> RLSEQ[alu_rl_sequence]
