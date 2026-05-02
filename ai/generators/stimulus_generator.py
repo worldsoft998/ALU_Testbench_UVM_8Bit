@@ -35,11 +35,13 @@ class SimulationDirective:
             self.opcode_weights = [1.0 / 6] * 6
 
     def to_vcs_plusargs(self) -> list[str]:
-        """Generate VCS plusarg strings for this directive."""
-        args = [
-            f"+ntb_random_seed={self.seed}",
-        ]
-        # Opcode weights encoded as plusargs for potential SV $value$plusargs use
+        """Generate supplementary VCS plusarg strings for this directive.
+
+        Note: ``+ntb_random_seed`` is intentionally omitted here because
+        ``run_vcs.sh`` already sets it via its ``--seed`` flag.  Including
+        it here would cause a duplicate plusarg.
+        """
+        args: list[str] = []
         for i, w in enumerate(self.opcode_weights):
             args.append(f"+AI_OP_WEIGHT_{i}={w:.4f}")
         args.append(f"+AI_OPERAND_BIAS={self.operand_bias}")

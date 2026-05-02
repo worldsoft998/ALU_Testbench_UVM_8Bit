@@ -30,7 +30,7 @@ class ALUCoverageEnv(gym.Env):
         [28]    – overall coverage percentage  (0..1)
         [29]    – normalised iteration counter (0..1)
 
-    Action (Discrete 420):
+    Action (Discrete 1050):
         Encoded as a single integer decomposed into four sub-fields:
             seed_bucket   (0-9)   – selects a seed region
             operand_bias  (0-4)   – default / zeros / ones / boundary / uniform
@@ -85,6 +85,7 @@ class ALUCoverageEnv(gym.Env):
         self._gen: Optional[StimulusGenerator] = None
         self._step_count = 0
         self._prev_coverage = 0.0
+        self._prev_corner_covered = 0
         self._episode_seed = base_seed
 
     # -- gym API -----------------------------------------------------------
@@ -104,6 +105,7 @@ class ALUCoverageEnv(gym.Env):
         self._gen = StimulusGenerator(seed=self._episode_seed)
         self._step_count = 0
         self._prev_coverage = 0.0
+        self._prev_corner_covered = 0
 
         return self._get_obs(), self._get_info()
 
@@ -135,9 +137,10 @@ class ALUCoverageEnv(gym.Env):
         reward = cov_delta * 10.0
 
         # Bonus for newly-covered corner-case bins (indices 16-27)
-        corner_vec = self._sim.coverage.covered_vector[16:28]
-        corner_bonus = float(np.sum(corner_vec)) * 0.5
-        reward += corner_bonus * (1.0 if cov_delta > 0 else 0.0)
+        corner_covered = int(np.sum(self._sim.coverage.covered_vector[16:28]))
+        new_corner_bins = corner_covered - self._prev_corner_covered
+        reward += new_corner_bins * 0.5
+        self._prev_corner_covered = corner_covered
 
         # Step cost
         reward -= 0.1

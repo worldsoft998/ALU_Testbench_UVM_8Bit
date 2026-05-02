@@ -289,7 +289,9 @@ class TestDirective(unittest.TestCase):
     def test_vcs_plusargs(self):
         d = SimulationDirective(seed=12345, num_transactions=1000)
         args = d.to_vcs_plusargs()
-        self.assertTrue(any("+ntb_random_seed=12345" in a for a in args))
+        # +ntb_random_seed is NOT in plusargs (handled by run_vcs.sh --seed)
+        self.assertFalse(any("ntb_random_seed" in a for a in args))
+        self.assertTrue(any("AI_OPERAND_BIAS" in a for a in args))
 
     def test_engine_baseline(self):
         engine = AIDirectedStimulusEngine(base_seed=42)

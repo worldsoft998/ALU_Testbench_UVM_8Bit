@@ -78,11 +78,14 @@ class VCSLogParser:
         if m:
             result.seed = int(m.group(1))
 
-        # UVM report counts
+        # UVM report counts: INFO(0), WARNING(1), ERROR(2), FATAL(3)
         uvm_counts = self._RE_UVM_SUMMARY.findall(text)
-        if len(uvm_counts) >= 2:
-            result.uvm_warnings = int(uvm_counts[0]) if len(uvm_counts) > 1 else 0
-            result.uvm_errors = int(uvm_counts[1]) if len(uvm_counts) > 2 else 0
+        if len(uvm_counts) >= 3:
+            result.uvm_warnings = int(uvm_counts[1])
+            result.uvm_errors = int(uvm_counts[2])
+        elif len(uvm_counts) >= 2:
+            result.uvm_warnings = int(uvm_counts[1])
+            result.uvm_errors = 0
 
         # Error lines from scoreboard
         errors = self._RE_SCB_ERROR.findall(text)

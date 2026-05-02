@@ -272,9 +272,16 @@ class StimulusGenerator:
     # -- internal helpers -------------------------------------------------
 
     def _sample_operand_default(self) -> int:
-        """Mirrors UVM dist { 0xFF := 80, 0x00 := 80, [0x01:0xFE] := 10 }."""
+        """Mirrors UVM dist { 0xFF := 80, 0x00 := 80, [0x01:0xFE] := 10 }.
+
+        UVM `:=` assigns the weight to *each* value in the range, so
+        [0x01:0xFE] has 254 items each with weight 10 → total 2540.
+        Total weight = 80 + 80 + 254*10 = 2700.
+        P(0xFF) ≈ 2.96%, P(0x00) ≈ 2.96%, P(random) ≈ 94.07%.
+        """
         r = self.rng.random()
-        total = 80 + 80 + 10
+        # Per-item weights: 0xFF=80, 0x00=80, each of [0x01..0xFE]=10
+        total = 80 + 80 + 254 * 10  # = 2700
         if r < 80 / total:
             return 0xFF
         elif r < 160 / total:
