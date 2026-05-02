@@ -1,0 +1,41 @@
+# ── Build artifacts ──
+work/
+csrc/
+simv
+simv.daidir/
+DVEfiles/
+ucli.key
+vc_hdrs.h
+inter.vpd
+*.fsdb
+*.vpd
+
+# ── Coverage ──
+coverage/
+urgReport/
+
+# ── Logs ──
+logs/
+
+# ── Python ──
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── AI/RL outputs ──
+results/
+models/
+*.zip
+
+# ── Editor / OS ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

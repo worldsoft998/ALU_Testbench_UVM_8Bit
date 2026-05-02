@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aid-vo"
+version = "1.0.0"
+description = "AI-Directed Verification Optimization for UVM testbenches"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+
+dependencies = [
+    "gymnasium>=0.29.0,<1.0",
+    "stable-baselines3>=2.1.0,<3.0",
+    "numpy>=1.24.0,<2.0",
+    "torch>=2.0.0",
+]
+
+[project.optional-dependencies]
+viz = ["matplotlib>=3.7.0"]
+dev = ["pytest>=7.0", "ruff>=0.1.0"]
+
+[tool.setuptools.packages.find]
+include = ["ai*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
