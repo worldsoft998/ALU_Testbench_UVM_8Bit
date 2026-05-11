@@ -1,0 +1,38 @@
+# Simulation outputs
+sim_work/
+simv
+simv.daidir/
+csrc/
+ucli.key
+vc_hdrs.h
+DVEfiles/
+*.vpd
+inter.vpd
+.inter.vpd.uvm
+coverage_db/
+urgReport/
+
+# Results (generated at runtime)
+results/
+
+# Distribution
+dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

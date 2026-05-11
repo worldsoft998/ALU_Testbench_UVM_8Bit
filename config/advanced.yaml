@@ -1,0 +1,82 @@
+#===============================================================================
+# AIa-VO: Advanced Configuration
+# Aggressive optimization with ensemble ML and higher iteration count
+#===============================================================================
+
+project_root: "."
+target_coverage: 100.0
+max_iterations: 100
+convergence_threshold: 0.05
+convergence_patience: 8
+min_runs_before_ai: 5
+parallel_sims: 1
+enable_llm: true
+enable_ml: true
+comparison_mode: true
+results_dir: "results"
+log_level: "DEBUG"
+
+baseline_seeds:
+  - 12345
+  - 54321
+  - 98765
+  - 11111
+  - 22222
+  - 33333
+  - 44444
+  - 55555
+  - 66666
+  - 77777
+  - 88888
+  - 99999
+  - 13579
+  - 24680
+  - 31415
+  - 27182
+  - 14142
+  - 17320
+  - 22360
+  - 26457
+
+simulation:
+  simulator: "vcs"
+  uvm_version: "1.2"
+  timescale: "1ns/1ps"
+  default_num_items: 10000
+  max_num_items: 80000
+  timeout_ns: 20000000
+  compile_opts: ""
+  runtime_opts: ""
+  coverage_dir: "coverage_db"
+  work_dir: "sim_work"
+  dut_files:
+    - "DUT/ALU_DUT.sv"
+    - "DUT/ALU_interface.sv"
+  tb_files:
+    - "Testbench/ALU_pkg.sv"
+    - "Testbench/ALU_Top.sv"
+  tb_top: "Top"
+
+llm:
+  provider: "openai"
+  model: "gpt-4o"
+  api_key_env: "OPENAI_API_KEY"
+  max_tokens: 2048
+  temperature: 0.2
+  max_retries: 5
+  timeout: 60
+
+ml:
+  algorithm: "ensemble"
+  rl_learning_rate: 0.005
+  rl_discount_factor: 0.99
+  rl_epsilon: 0.3
+  rl_epsilon_decay: 0.99
+  rl_min_epsilon: 0.01
+  bayesian_n_initial: 8
+  bayesian_acquisition: "ei"
+  bayesian_xi: 0.005
+  bayesian_kappa: 3.0
+  seed_range_min: 1
+  seed_range_max: 200000
+  feature_dim: 64

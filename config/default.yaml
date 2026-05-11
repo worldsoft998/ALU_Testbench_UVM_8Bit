@@ -1,0 +1,80 @@
+#===============================================================================
+# AIa-VO: Default Configuration
+# AI Agent Supported Verification Optimization
+#===============================================================================
+
+# Project settings
+project_root: "."
+target_coverage: 100.0
+max_iterations: 50
+convergence_threshold: 0.1
+convergence_patience: 5
+min_runs_before_ai: 3
+parallel_sims: 1
+enable_llm: true
+enable_ml: true
+comparison_mode: true
+results_dir: "results"
+log_level: "INFO"
+
+# Baseline seeds for comparison (deterministic)
+baseline_seeds:
+  - 12345
+  - 54321
+  - 98765
+  - 11111
+  - 22222
+  - 33333
+  - 44444
+  - 55555
+  - 66666
+  - 77777
+
+# VCS Simulation settings
+simulation:
+  simulator: "vcs"
+  uvm_version: "1.2"
+  timescale: "1ns/1ps"
+  default_num_items: 5000
+  max_num_items: 80000
+  timeout_ns: 10000000
+  compile_opts: ""
+  runtime_opts: ""
+  coverage_dir: "coverage_db"
+  work_dir: "sim_work"
+  dut_files:
+    - "DUT/ALU_DUT.sv"
+    - "DUT/ALU_interface.sv"
+  tb_files:
+    - "Testbench/ALU_pkg.sv"
+    - "Testbench/ALU_Top.sv"
+  tb_top: "Top"
+
+# LLM Configuration
+llm:
+  provider: "openai"             # openai, gemini, claude
+  model: "gpt-4o-mini"           # Model name
+  api_key_env: "OPENAI_API_KEY"  # Environment variable for API key
+  max_tokens: 1024               # Max response tokens
+  temperature: 0.3               # Sampling temperature
+  max_retries: 3
+  timeout: 30
+
+# ML/RL Configuration
+ml:
+  algorithm: "bayesian"          # bayesian, rl, random_forest, ensemble
+  # RL parameters
+  rl_learning_rate: 0.01
+  rl_discount_factor: 0.95
+  rl_epsilon: 0.2
+  rl_epsilon_decay: 0.995
+  rl_min_epsilon: 0.01
+  # Bayesian optimization parameters
+  bayesian_n_initial: 5
+  bayesian_acquisition: "ei"     # ei (Expected Improvement), ucb, pi
+  bayesian_xi: 0.01
+  bayesian_kappa: 2.576
+  # Seed range
+  seed_range_min: 1
+  seed_range_max: 100000
+  feature_dim: 32
